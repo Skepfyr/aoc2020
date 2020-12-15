@@ -46,9 +46,8 @@ pub fn input_generator(input: &str) -> Vec<u64> {
     input.split(',').map(|n| n.parse().unwrap()).collect()
 }
 
-
 #[aoc(day15, part1)]
-pub fn day14_part1(input: &[u64]) -> u64 {
+pub fn day15_part1(input: &[u64]) -> u64 {
     let mut game = MemoryGame::new(input.to_vec());
     game.nth(2020 - 1).unwrap()
 }
@@ -66,7 +65,10 @@ mod tests {
     #[test]
     fn memory_game() {
         let game = MemoryGame::new(vec![0, 3, 6]);
-        assert_eq!(vec![0, 3, 6, 0, 3, 3, 1, 0, 4, 0], game.take(10).collect::<Vec<_>>());
+        assert_eq!(
+            vec![0, 3, 6, 0, 3, 3, 1, 0, 4, 0],
+            game.take(10).collect::<Vec<_>>()
+        );
         let mut game = MemoryGame::new(vec![0, 3, 6]);
         assert_eq!(436, game.nth(2020 - 1).unwrap());
     }

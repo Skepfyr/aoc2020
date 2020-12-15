@@ -59,7 +59,9 @@ pub struct BitMaskIter {
 
 impl BitMaskIter {
     fn new(mask: BitMask) -> Self {
-        let value = mask.mask.iter().rev().fold(0u64, |acc, &bit| (acc << 1) | if bit == Some(true) { 1 } else  { 0 });
+        let value = mask.mask.iter().rev().fold(0u64, |acc, &bit| {
+            (acc << 1) | if bit == Some(true) { 1 } else { 0 }
+        });
         Self {
             mask,
             value,
@@ -191,6 +193,9 @@ mod tests {
     #[test]
     fn values() {
         let mask = BitMask::new("mask = 000000000000000000000000000000X1001X");
-        assert_eq!(vec![26, 27, 58, 59], (mask | 42).values().collect::<Vec<_>>());
+        assert_eq!(
+            vec![26, 27, 58, 59],
+            (mask | 42).values().collect::<Vec<_>>()
+        );
     }
 }
