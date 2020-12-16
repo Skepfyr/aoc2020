@@ -2,7 +2,8 @@
     array_windows,
     bool_to_option,
     map_first_last,
-    destructuring_assignment
+    destructuring_assignment,
+    str_split_once
 )]
 
 use aoc_runner_derive::*;
@@ -22,5 +23,6 @@ mod day12;
 mod day13;
 mod day14;
 mod day15;
+mod day16;
 
 aoc_lib! { year = 2020 }
