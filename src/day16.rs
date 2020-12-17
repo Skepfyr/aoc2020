@@ -70,16 +70,23 @@ pub fn day16_part1(input: &Input) -> u64 {
 
 #[aoc(day16, part2)]
 pub fn day16_part2(input: &Input) -> u64 {
-    let valid_tickets = input.other_tickets.iter().map(|vec| vec.as_slice()).filter(move |ticket| {
-        ticket.iter().all(|value| {
-            input
-                .fields
-                .iter()
-                .flat_map(|(_, v)| v)
-                .any(|range| range.contains(value))
-        })
-    });
-    let mut options: Vec<_> = (0..input.ticket.len()).map(|_| vec![true; input.fields.len()]).collect();
+    let valid_tickets =
+        input
+            .other_tickets
+            .iter()
+            .map(|vec| vec.as_slice())
+            .filter(move |ticket| {
+                ticket.iter().all(|value| {
+                    input
+                        .fields
+                        .iter()
+                        .flat_map(|(_, v)| v)
+                        .any(|range| range.contains(value))
+                })
+            });
+    let mut options: Vec<_> = (0..input.ticket.len())
+        .map(|_| vec![true; input.fields.len()])
+        .collect();
     for ticket in valid_tickets {
         for (i, value) in ticket.iter().enumerate() {
             for (j, (_, field_ranges)) in input.fields.iter().enumerate() {
@@ -91,19 +98,23 @@ pub fn day16_part2(input: &Input) -> u64 {
     }
     let mut permutation: Vec<Option<usize>> = vec![None; input.ticket.len()];
     for _ in 0..permutation.len() {
-        let (loc, field) = options.iter().enumerate().find_map(|(loc, possibles)| {
-            let mut only_option = None;
-            for (field, &possible) in possibles.iter().enumerate() {
-                if possible {
-                    if only_option.is_some() {
-                        return None;
-                    } else {
-                        only_option = Some((loc, field));
+        let (loc, field) = options
+            .iter()
+            .enumerate()
+            .find_map(|(loc, possibles)| {
+                let mut only_option = None;
+                for (field, &possible) in possibles.iter().enumerate() {
+                    if possible {
+                        if only_option.is_some() {
+                            return None;
+                        } else {
+                            only_option = Some((loc, field));
+                        }
                     }
                 }
-            }
-            only_option
-        }).unwrap();
+                only_option
+            })
+            .unwrap();
         for option in options.iter_mut() {
             option[field] = false;
         }
