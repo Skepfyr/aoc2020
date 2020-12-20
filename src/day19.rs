@@ -107,7 +107,6 @@ pub fn day19_part2((rule_set, images): &(RuleSet, Vec<String>)) -> usize {
         .iter()
         .filter(|image| rule_set.matches(image))
         .count()
-
 }
 
 #[cfg(test)]
