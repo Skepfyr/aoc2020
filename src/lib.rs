@@ -3,7 +3,8 @@
     bool_to_option,
     map_first_last,
     destructuring_assignment,
-    str_split_once
+    str_split_once,
+    linked_list_cursors
 )]
 
 use aoc_runner_derive::*;
@@ -30,5 +31,6 @@ mod day19;
 mod day20;
 mod day21;
 mod day22;
+mod day23;
 
 aoc_lib! { year = 2020 }
